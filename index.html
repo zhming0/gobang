@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Gobang - HTML5 </title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      width: 100%;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 50px 0; 
+      margin: 0 auto;
+    }
+
+    .gobang-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+    }
+
+    canvas {
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    .gobang-container > * {
+      display: block;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      width: 500px;
+      height: 500px;
+      max-width: 100%;
+    }
+
+    .gobang-panel {
+      z-index: 2;
+      display: table;
+      text-align: center;
+      background: rgba(40, 40, 40, 0.8);
+      font-size: 30px;
+      font: bold;
+      color: #CCCC66;
+    }
+  </style>
+  <body>
+    <div class="gobang-container">
+      <canvas id="gobang" width="500" height="500">
+        Your browser doesn't support HTML5 canvas. 
+        <br/>
+        您的浏览器不支持HTML5哦
+      </canvas>
+      <div class="gobang-panel" id="gobang-welcome"> 
+        <div style="display: table-cell; vertical-align: middle;"> 
+          <h2 style="padding-bottom: 40px;"> Gobang in HTML5 </h2>
+          <a class="gobang-start" href="#"> Start </a>
+        </div>
+      </div>
+      <div class="gobang-panel" id="gobang-result"> 
+        <div style="display: table-cell; vertical-align: middle;"> 
+          <h2><span id="gobang-winner">White</span> wins! </h2>
+          <div>
+            <a class="gobang-start" href="#"> Restart </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"> 
+      <p> Gobang in HTML5 - Kill time while waiting</p>
+      <p> Copyright © 2014 Zhiming Guo </p>
+    </div>
+    <script type="text/javascript" src="gobang.js"> </script>
+    <script> 
+      gobang = new Gobang(document.getElementById("gobang"));
+      if (gobang.init()) {
+        //gobang.run();
+      }
+    </script>
+  </body>
+</html>
