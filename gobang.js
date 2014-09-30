@@ -99,7 +99,7 @@ function Gobang(canvasDOM, rows, cols) {
             waitingPanel.style.display = "table";
             var that = this;
             setTimeout(function() {
-                ret = AI.play(that.grid, that.currentPlayer, 3);
+                ret = AI.play(that.grid, that.currentPlayer, 2);
                 waitingPanel.style.display = "none";
                 var elapsed = (Date.now() / 1000 - startTime);
                 console.log("AI said: ", ret[0], ret[1], " Spent: ", elapsed, " seconds.");
