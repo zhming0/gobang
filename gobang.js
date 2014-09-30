@@ -108,6 +108,17 @@ function Gobang(canvasDOM, rows, cols) {
             }, 40);
         }
     }
+    this.regret = function() {
+        var tmp = this.moves.pop();
+        if (tmp)
+            this.grid[tmp[0]][tmp[1]] = -1;
+        tmp = this.moves.pop();
+        if (tmp)
+            this.grid[tmp[0]][tmp[1]] = -1;
+        this.currentPlayer = 1 - this.currentPlayer;
+        this.draw();
+        this.currentPlayer = 1 - this.currentPlayer;
+    }
 
     this.winningMove = function(row, col) {
         for (var i = -1; i <= 1; i++)

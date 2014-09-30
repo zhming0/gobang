@@ -104,6 +104,8 @@
         <option value="2" selected="true"> Easy </option>
         <option value="3"> Hard </option>
       </select>
+
+      <button id="gobang-regret" style="display: inline-block; line-height: 20px; margin-left: 20px;"> Regret! </button>
     </div>
     <div class="footer"> 
       <p> Gobang in HTML5 - Kill time while waiting</p>
@@ -113,6 +115,7 @@
     <script> 
       gobang = new Gobang(document.getElementById("gobang"));
       if (gobang.init()) {
+        gobang.draw();
         //gobang.run();
       }
       document.getElementById("gobang-difficulty").onchange = function(e) {
@@ -120,6 +123,9 @@
           var v = parseInt(e.target[this.selectedIndex].value, 10);
           gobang.hardness = v;
         }
+      };
+      document.getElementById("gobang-regret").onclick = function(e) {
+        gobang.regret();
       };
     </script>
     <script type="text/javascript" src="gobang-ai-fast.js"></script> 
