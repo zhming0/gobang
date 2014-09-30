@@ -38,6 +38,17 @@ function Gobang(canvasDOM, rows, cols) {
                 this.canvas.closePath();
                 this.canvas.fill();
                 currentPlayer = 1 - currentPlayer;
+
+                if (i == this.moves.length - 1) {
+                    this.canvas.fillStyle = "#f00";
+                    this.canvas.beginPath();
+                    this.canvas.arc(
+                            this.moves[i][1] * this.game.cellWidth + this.game.cellWidth,
+                            this.moves[i][0] * this.game.cellHeight + this.game.cellHeight, 
+                            3, 0, 2 * Math.PI);
+                    this.canvas.closePath();
+                    this.canvas.fill();
+                }
             }
         }
     }
@@ -70,6 +81,9 @@ function Gobang(canvasDOM, rows, cols) {
                 winnerDOM.innerHTML = "Black";
             else
                 winnerDOM.innerHTML = "White";
+
+            if (isAI)
+                winnerDOM.innerHTML = winnerDOM.innerHTML + "-AI";
 
             this.currentPlayer = 0;
             this.finish();
