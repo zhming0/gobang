@@ -1,12 +1,4 @@
 function Gobang(canvasDOM, rows, cols) {
-    var requestFrame = function() {
-        return window.requestAnimationFrame || 
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame ||
-            function(callback) {
-                setTimeout(callback, 40);
-            };
-    }();
     function Background(rows, cols) {
         this.rows = rows;
         this.cols = cols;
@@ -79,6 +71,7 @@ function Gobang(canvasDOM, rows, cols) {
             else
                 winnerDOM.innerHTML = "White";
 
+            this.currentPlayer = 0;
             this.finish();
             return;
         }
