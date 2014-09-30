@@ -47,8 +47,8 @@ function Gobang(canvasDOM, rows, cols) {
         return row >= 0 && col >= 0 && row < this.rows && col < this.cols;
     }
 
-    this.rows = rows ? rows : 19;
-    this.cols = cols ? cols : 19;
+    this.rows = rows ? rows : 15;
+    this.cols = cols ? cols : 15;
 
     this.currentPlayer = 0;
     this.moves = [];
