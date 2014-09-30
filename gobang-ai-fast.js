@@ -156,7 +156,7 @@ var AI = function() {
 
                 var enm_cs = -enm_ret[0];
                 if (maxChance && enm_cs >= maxChance)
-                    return [0x7fffffff, [i, j]];
+                    return [0x7fffffff * 100, [i, j]];
                 if (enm_cs > ret[0])
                     ret = [enm_cs, [i, j]];
             }

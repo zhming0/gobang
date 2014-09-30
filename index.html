@@ -64,6 +64,10 @@
       font: bold;
       color: #CCCC66;
     }
+    .gobang-controller {
+      margin: 10px auto;
+      text-align: center;
+    }
   </style>
   <body>
     <div class="gobang-container">
@@ -93,6 +97,14 @@
         </div>
       </div>
     </div>
+    <div class="gobang-controller">
+      Difficulty: 
+      <select id="gobang-difficulty">
+        <option value="1"> Super Easy </option>
+        <option value="2" selected="true"> Easy </option>
+        <option value="3"> Hard </option>
+      </select>
+    </div>
     <div class="footer"> 
       <p> Gobang in HTML5 - Kill time while waiting</p>
       <p> Copyright © 2014 <a href="http://mingplusplus.com">Zhiming Guo</a> </p>
@@ -103,6 +115,12 @@
       if (gobang.init()) {
         //gobang.run();
       }
+      document.getElementById("gobang-difficulty").onchange = function(e) {
+        if (typeof(this.selectedIndex) != undefined) {
+          var v = parseInt(e.target[this.selectedIndex].value, 10);
+          gobang.hardness = v;
+        }
+      };
     </script>
     <script type="text/javascript" src="gobang-ai-fast.js"></script> 
     <script type="text/javascript"> 

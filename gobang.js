@@ -68,6 +68,7 @@ function Gobang(canvasDOM, rows, cols) {
         this.grid[i] = new Array(this.cols);
 
     this.enableAI = true;
+    this.hardness = 2;
     this.newMove = function(row, col, isAI) {
         if (this.grid[row][col] != -1) return;
         this.grid[row][col] = this.currentPlayer;
@@ -99,7 +100,7 @@ function Gobang(canvasDOM, rows, cols) {
             waitingPanel.style.display = "table";
             var that = this;
             setTimeout(function() {
-                ret = AI.play(that.grid, that.currentPlayer, 2);
+                ret = AI.play(that.grid, that.currentPlayer, that.hardness);
                 waitingPanel.style.display = "none";
                 var elapsed = (Date.now() / 1000 - startTime);
                 console.log("AI said: ", ret[0], ret[1], " Spent: ", elapsed, " seconds.");
