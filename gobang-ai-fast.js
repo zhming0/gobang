@@ -145,6 +145,7 @@ var AI = function() {
                 if (!notAlone(grid, i, j)) continue;
                 grid[i][j] = crtPlayer;
                 if (depth != 1) {
+                    // FIXME: check the victory directly
                     var tmp_cs = chance(grid, crtPlayer);
                     if (tmp_cs >= maxList[0]) {
                         grid[i][j] = -1;
