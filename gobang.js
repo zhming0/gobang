@@ -1,4 +1,12 @@
 function Gobang(canvasDOM, rows, cols) {
+    var requestFrame = function() {
+        return window.requestAnimationFrame || 
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function(callback) {
+                setTimeout(callback, 40);
+            };
+    }();
     function Background(rows, cols) {
         this.rows = rows;
         this.cols = cols;
@@ -56,6 +64,7 @@ function Gobang(canvasDOM, rows, cols) {
     for (var i = 0; i < this.rows; i++) 
         this.grid[i] = new Array(this.cols);
 
+    this.enableAI = true;
     this.newMove = function(row, col, isAI) {
         if (this.grid[row][col] != -1) return;
         this.grid[row][col] = this.currentPlayer;
@@ -77,12 +86,18 @@ function Gobang(canvasDOM, rows, cols) {
         this.currentPlayer = 1 - this.currentPlayer;
 
         /* AI */
-        if (!isAI) {
+        if (!isAI && this.enableAI) {
             var startTime = Date.now() / 1000;
-            ret = AI.play(this.grid, this.currentPlayer, 3);
-            var elapsed = (Date.now() / 1000 - startTime);
-            console.log("AI said: ", ret[0], ret[1], " Spent: ", elapsed, " seconds.");
-            this.newMove(ret[1][0], ret[1][1], true);
+            var waitingPanel = document.getElementById("gobang-waiting");
+            waitingPanel.style.display = "table";
+            var that = this;
+            setTimeout(function() {
+                ret = AI.play(that.grid, that.currentPlayer, 3);
+                waitingPanel.style.display = "none";
+                var elapsed = (Date.now() / 1000 - startTime);
+                console.log("AI said: ", ret[0], ret[1], " Spent: ", elapsed, " seconds.");
+                that.newMove(ret[1][0], ret[1][1], true);
+            }, 40);
         }
     }
 
@@ -127,8 +142,8 @@ function Gobang(canvasDOM, rows, cols) {
 
         document.getElementById("gobang-result").style.display = "none";
         document.getElementById("gobang-welcome").style.display = "table";
-        var buttons = document.getElementsByClassName("gobang-start");
         var game = this;
+        var buttons = document.getElementsByClassName("gobang-start");
         for (var i = 0; i < buttons.length; i++)
             buttons[i].onclick = function() {
                 game.run();

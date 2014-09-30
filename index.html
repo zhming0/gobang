@@ -48,7 +48,7 @@
       z-index: 2;
       display: table;
       text-align: center;
-      background: rgba(40, 40, 40, 0.8);
+      background: rgba(40, 40, 40, 0.4);
       font-size: 30px;
       font: bold;
       color: #CCCC66;
@@ -64,15 +64,21 @@
       <div class="gobang-panel" id="gobang-welcome"> 
         <div style="display: table-cell; vertical-align: middle;"> 
           <h2 style="padding-bottom: 40px;"> Gobang in HTML5 </h2>
-          <a class="gobang-start" href="#"> Start </a>
+          <a class="gobang-start" href="#"> Play </a>
+          <!--<a class="gobang-start-human" href="#"> Play with Human </a>-->
         </div>
       </div>
       <div class="gobang-panel" id="gobang-result" style="display: none;"> 
         <div style="display: table-cell; vertical-align: middle;"> 
-          <h2><span id="gobang-winner">White</span> wins! </h2>
+          <h2><span id="gobang-winner">Somebody</span> wins! </h2>
           <div>
             <a class="gobang-start" href="#"> Restart </a>
           </div>
+        </div>
+      </div>
+      <div class="gobang-panel" id="gobang-waiting" style="display: none;"> 
+        <div style="display: table-cell; vertical-align: middle;"> 
+          <h3> Thinking ... @_@ </h3>
         </div>
       </div>
     </div>
@@ -89,11 +95,11 @@
     </script>
     <script type="text/javascript" src="gobang-ai-fast.js"></script> 
     <script type="text/javascript"> 
-      grid = [
-          [-1, -1, -1, -1, -1], 
-          [-1, 0, 0, 0, -1], 
-          [-1, -1, -1, -1, -1], 
-      ];
+      //grid = [
+      //    [-1, -1, -1, -1, -1], 
+      //    [-1, 0, 0, 0, -1], 
+      //    [-1, -1, -1, -1, -1], 
+      //];
       //console.log(grid[0]);
       //console.log(grid[1]);
       //ret = AI.play(grid, 1, 2);

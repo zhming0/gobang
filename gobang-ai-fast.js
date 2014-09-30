@@ -115,12 +115,9 @@ var AI = function() {
         });
         return ret;
     }
-
-    var tmpgrid = [
-        [-1, -1, -1, -1, -1], 
-        [-1, 0, 0, 0, -1], 
-        [-1, -1, -1, -1, -1], 
-    ];
+    //chance = _.memoize(chance, function(grid, crt) {
+    //    return [grid, crt];
+    //});
 
     AI.play = function(grid, crtPlayer, depth, maxChance) {
         if (depth == 0)
@@ -146,15 +143,20 @@ var AI = function() {
             for (var j = 0; j < col; j++) {
                 if (grid[i][j] != -1) continue;
                 if (!notAlone(grid, i, j)) continue;
-                if (maxChance && ret[0] >= maxChance)
-                    return [0x7fffffff, [i, j]];
                 grid[i][j] = crtPlayer;
+                if (depth != 1) {
+                    var tmp_cs = chance(grid, crtPlayer);
+                    if (tmp_cs >= maxList[0]) {
+                        grid[i][j] = -1;
+                        return [tmp_cs, [i, j]];
+                    }
+                }
                 var enm_ret = AI.play(grid, switchPlayer(crtPlayer), depth - 1, -ret[0]);
                 grid[i][j] = -1;
 
-                //console.log(depth, crtPlayer, [i, j], enm_ret);
-
                 var enm_cs = -enm_ret[0];
+                if (maxChance && enm_cs >= maxChance)
+                    return [0x7fffffff, [i, j]];
                 if (enm_cs > ret[0])
                     ret = [enm_cs, [i, j]];
             }
