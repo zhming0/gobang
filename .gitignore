@@ -1,0 +1,12 @@
+*.DS_Store
+
+out/*
+
+*.swp
+
+.repl
+
+target/*
+
+repl/*
+.lein-repl-history

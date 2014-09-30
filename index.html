@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Gobang - HTML5 </title>
+
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   </head>
   <style>
     * {
@@ -65,7 +67,7 @@
           <a class="gobang-start" href="#"> Start </a>
         </div>
       </div>
-      <div class="gobang-panel" id="gobang-result"> 
+      <div class="gobang-panel" id="gobang-result" style="display: none;"> 
         <div style="display: table-cell; vertical-align: middle;"> 
           <h2><span id="gobang-winner">White</span> wins! </h2>
           <div>
@@ -85,5 +87,17 @@
         //gobang.run();
       }
     </script>
+    <script type="text/javascript" src="gobang-ai-fast.js"></script> 
+    <script type="text/javascript"> 
+      grid = [
+          [-1, -1, -1, -1, -1], 
+          [-1, 0, 0, 0, -1], 
+          [-1, -1, -1, -1, -1], 
+      ];
+      //console.log(grid[0]);
+      //console.log(grid[1]);
+      //ret = AI.play(grid, 1, 2);
+      //console.log(ret[0], ret[1]);
+    </script> 
   </body>
 </html>

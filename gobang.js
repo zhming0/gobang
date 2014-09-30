@@ -56,7 +56,7 @@ function Gobang(canvasDOM, rows, cols) {
     for (var i = 0; i < this.rows; i++) 
         this.grid[i] = new Array(this.cols);
 
-    this.newMove = function(row, col) {
+    this.newMove = function(row, col, isAI) {
         if (this.grid[row][col] != -1) return;
         this.grid[row][col] = this.currentPlayer;
         this.moves.push([row, col]);
@@ -71,9 +71,19 @@ function Gobang(canvasDOM, rows, cols) {
                 winnerDOM.innerHTML = "White";
 
             this.finish();
+            return;
         }
 
         this.currentPlayer = 1 - this.currentPlayer;
+
+        /* AI */
+        if (!isAI) {
+            var startTime = Date.now() / 1000;
+            ret = AI.play(this.grid, this.currentPlayer, 3);
+            var elapsed = (Date.now() / 1000 - startTime);
+            console.log("AI said: ", ret[0], ret[1], " Spent: ", elapsed, " seconds.");
+            this.newMove(ret[1][0], ret[1][1], true);
+        }
     }
 
     this.winningMove = function(row, col) {
