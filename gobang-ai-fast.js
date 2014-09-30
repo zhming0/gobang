@@ -155,6 +155,7 @@ var AI = function() {
                 var enm_ret = AI.play(grid, switchPlayer(crtPlayer), depth - 1, -ret[0]);
                 grid[i][j] = -1;
 
+                // TODO: add random reaction
                 var enm_cs = -enm_ret[0];
                 if (maxChance && enm_cs >= maxChance)
                     return [0x7fffffff * 100, [i, j]];
