@@ -28,7 +28,9 @@ var AI = function() {
             [[otr, 3, 2], -maxList[5]],
             [[otr, 4, 1], -maxList[5]],
             [[crt, 2, 2], maxList[6]],
+            [[crt, 3, 1], maxList[6]],
             [[otr, 2, 2], -maxList[6]],
+            [[otr, 3, 1], -maxList[6]],
             [[crt, 2, 1], maxList[7]],
             [[otr, 2, 1], -maxList[7]]
         ];
