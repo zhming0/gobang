@@ -115,9 +115,34 @@ var AI = function() {
         });
         return ret;
     }
-    //chance = _.memoize(chance, function(grid, crt) {
-    //    return [grid, crt];
-    //});
+
+    var isOver = function(grid, cell) {
+        var dirs = [
+            [0, 1], [1, 0],
+            [1, 1], [-1, 1]
+        ];
+        var crt = grid[cell[0]][cell[1]];
+        var row = grid.length;
+        var col = grid[0].length;
+        var rets = _.map(dirs, function(dir) {
+            var cnt = 1;
+            for (var i = -1; i <= 1; i += 2) {
+                var sy = cell[0] + i * dir[0];
+                var sx = cell[1] + i * dir[1];
+                while (sy < row && sy >= 0 && sx < col && sx >=0 && 
+                        grid[sy][sx] == crt) {
+                    cnt++;
+                    sy += i * dir[0];
+                    sx += i * dir[1];
+                }
+            }
+            return cnt;
+        });
+        if (_.max(rets) >= 5)
+            return true;
+        else
+            return false;
+    }
 
     AI.play = function(grid, crtPlayer, depth, maxChance) {
         if (depth == 0)
@@ -138,29 +163,29 @@ var AI = function() {
                 }
             return false;
         }
-        var ret = [-0x7fffffff, null];
+        var ret = [-0x7fffffff * 100, null];
         for (var i = 0; i < row; i++) {
             for (var j = 0; j < col; j++) {
                 if (grid[i][j] != -1) continue;
                 if (!notAlone(grid, i, j)) continue;
                 grid[i][j] = crtPlayer;
                 if (depth != 1) {
-                    // FIXME: check the victory directly
-                    var tmp_cs = chance(grid, crtPlayer);
-                    if (tmp_cs >= maxList[0]) {
+                    if (isOver(grid, [i, j])) {
                         grid[i][j] = -1;
-                        return [tmp_cs, [i, j]];
+                        return [0x7fffffff * 10, [i, j]];
                     }
                 }
                 var enm_ret = AI.play(grid, switchPlayer(crtPlayer), depth - 1, -ret[0]);
                 grid[i][j] = -1;
 
-                // TODO: add random reaction
                 var enm_cs = -enm_ret[0];
-                if (maxChance && enm_cs >= maxChance)
-                    return [0x7fffffff * 100, [i, j]];
+                if (maxChance && enm_cs > maxChance)
+                    return [enm_cs, [i, j]];
                 if (enm_cs > ret[0])
                     ret = [enm_cs, [i, j]];
+                else if (enm_cs == ret[0] && Math.random() < 0.5) {
+                    ret = [enm_cs, [i, j]];
+                }
             }
         }
         return ret;
